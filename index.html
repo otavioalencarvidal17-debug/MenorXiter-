@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Flutuante Neon</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<canvas id="matrix-bg"></canvas>
+
+<!-- Login -->
+<div id="login-flutuante" class="flutuante">
+  <h2>MenorXiter</h2>
+  <input type="text" id="key-input" placeholder="Digite sua key">
+  <button id="login-btn">ENTRAR</button>
+  <div id="login-error">Key inválida!</div>
+</div>
+
+<!-- Painel flutuante -->
+<div id="painel-flutuante" class="flutuante">
+  <div id="sidebar">
+    <button class="tab-btn active" data-tab="1">&#9675;</button>
+    <button class="tab-btn" data-tab="2">+</button>
+    <button class="tab-btn" data-tab="3">&#9632;</button>
+    <button class="tab-btn" data-tab="4">&#128737;</button>
+  </div>
+
+  <div id="conteudo">
+    <div class="tab-content" data-content="1">
+      <h3>Aimbot 💥</h3>
+      <div class="switch-container">
+        <label>Aimbot 95%</label>
+        <input type="checkbox">
+      </div>
+      <div class="switch-container">
+        <label>Aumentar Precisão</label>
+        <input type="checkbox">
+      </div>
+      <div class="slider-container">
+        <label>Precisão <span id="fov-value">5</span></label>
+        <input type="range" min="0" max="10" value="5" id="fov-slider">
+      </div>
+    </div>
+
+    <div class="tab-content" data-content="2">
+      <h3>Funções Recoil ⚡</h3>
+      <div class="switch-container">
+        <label>No Recoil</label>
+        <input type="checkbox">
+      </div>
+      <div class="switch-container">
+        <label>Precisão Avançada</label>
+        <input type="checkbox">
+      </div>
+    </div>
+
+    <div class="tab-content" data-content="3">
+      <h3>FPS/Otimização 🚀</h3>
+      <div class="switch-container">
+        <label>Ativar 120 FPS</label>
+        <input type="checkbox">
+      </div>
+      <div class="switch-container">
+        <label>Ativar Otimização</label>
+        <input type="checkbox">
+      </div>
+    </div>
+
+    <div class="tab-content" data-content="4">
+      <h3>Cores do Tema 🎨</h3>
+      <a href="https://discord.gg/9PdFkEu8zh" target="_blank" class="discord-btn">Acessar Discord</a>
+      <div id="color-picker">
+        <div class="color-circle red"></div>
+        <div class="color-circle green"></div>
+        <div class="color-circle blue"></div>
+        <div class="color-circle pink"></div>
+        <div class="color-circle yellow"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>/* --- Fundo Matrix --- */
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background: black;
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+canvas#matrix-bg {
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index: -1;
+}
+
+/* --- Flutuante --- */
+.flutuante {
+  background-color: #0d0d0d;
+  border: 2px solid #ff0000;
+  border-radius: 20px;
+  box-shadow: 0 0 30px #ff0000;
+  padding: 30px 40px;
+  min-width: 350px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Login */
+#login-flutuante input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border-radius: 15px;
+  border: 1px solid #ff0000;
+  background-color: #1a1a1a;
+  color: white;
+  font-size: 16px;
+  outline: none;
+}
+#login-flutuante input::placeholder { color: #888; }
+
+#login-flutuante button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 15px;
+  border: none;
+  background: linear-gradient(90deg,#ff0000,#ff4b4b);
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+  color: white;
+  transition: all 0.2s ease;
+}
+#login-flutuante button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #ff0000;
+}
+#login-error { color: #ff0000; margin-top: 10px; display: none; font-size: 14px; text-align: center; }
+
+/* Painel principal */
+#painel-flutuante { display: none; flex-direction: row; }
+
+/* Sidebar esquerda */
+#sidebar { display: flex; flex-direction: column; margin-right: 20px; }
+.tab-btn {
+  width: 45px; height: 45px; margin: 5px 0;
+  border-radius: 10px; border: none; background: #1a1a1a;
+  color: #ff0000; font-size: 20px; cursor: pointer;
+  display: flex; justify-content: center; align-items: center;
+  box-shadow: 0 0 5px #ff0000; transition: all 0.2s;
+}
+.tab-btn.active, .tab-btn:hover { 
+  background: #ff0000; 
+  color: #0d0d0d; 
+  box-shadow: 0 0 20px #ff0000; 
+}
+
+/* Conteúdo painel */
+#conteudo {
+  background-color: #0d0d0d;
+  border-radius: 20px;
+  padding: 20px;
+  flex: 1;
+  min-width: 300px;
+  box-shadow: 0 0 30px #ff0000;
+}
+#conteudo h3 { 
+  color: #ff4b4b; 
+  margin-top: 0; 
+  margin-bottom: 15px; 
+  font-size: 20px;
+  text-shadow: 0 0 10px #ff0000;
+}
+
+.switch-container, .slider-container { 
+  margin: 10px 0; 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+}
+.slider-container input[type=range] { width: 70%; }
+.switch-container input[type=checkbox] { width: 20px; height: 20px; }
+
+/* Cores do tema */
+#color-picker { display: flex; margin-top: 10px; justify-content: space-around; }
+.color-circle { width: 25px; height: 25px; border-radius: 50%; cursor: pointer; border: 2px solid white; transition: transform 0.2s;}
+.color-circle:hover { transform: scale(1.2); }
+.red { background: red; } 
+.green { background: lime; } 
+.blue { background: blue; }
+.pink { background: hotpink; } 
+.yellow { background: orange; }
+
+/* Botão Discord */
+.discord-btn { 
+  display: block; 
+  background-color: #7289da; 
+  color: white; 
+  padding: 10px; 
+  text-align: center; 
+  margin: 10px 0; 
+  border-radius: 10px; 
+  text-decoration: none; 
+  font-weight: bold; 
+  transition: all 0.2s;
+}
+.discord-btn:hover { 
+  transform: scale(1.05); 
+  box-shadow: 0 0 15px #7289da; 
+}// --- Matrix background ---
+const canvas = document.getElementById('matrix-bg');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const letters = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789'.split('');
+const fontSize = 20;
+const columns = Math.floor(canvas.width / fontSize);
+const drops = Array(columns).fill(1);
+let matrixColor = '#ff0000';
+
+function drawMatrix() {
+  ctx.fillStyle = 'rgba(0,0,0,0.05)';
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle = matrixColor;
+  ctx.font = fontSize + 'px monospace';
+
+  for(let i=0;i<drops.length;i++){
+    const text = letters[Math.floor(Math.random()*letters.length)];
+    ctx.fillText(text,i*fontSize,drops[i]*fontSize);
+    if(drops[i]*fontSize>canvas.height || Math.random()>0.975) drops[i]=0;
+    drops[i]++;
+  }
+}
+setInterval(drawMatrix,33);
+
+window.addEventListener('resize',()=>{
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
+// --- Login ---
+const loginBtn = document.getElementById('login-btn');
+const keyInput = document.getElementById('key-input');
+const loginError = document.getElementById('login-error');
+const loginFlutuante = document.getElementById('login-flutuante');
+const painelFlutuante = document.getElementById('painel-flutuante');
+const validKeys = ["MenorXiter","HGZINN"];
+
+loginBtn.addEventListener('click',()=>{
+  const key = keyInput.value.trim();
+  if(validKeys.includes(key)){
+    loginError.style.display = 'none';
+    loginFlutuante.style.display = 'none';
+    painelFlutuante.style.display = 'flex';
+  } else {
+    loginError.style.display = 'block';
+  }
+});
+
+// --- Tabs ---
+const tabBtns = document.querySelectorAll('.tab-btn');
+const tabContents = document.querySelectorAll('.tab-content');
+tabBtns.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    tabBtns.forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const tab = btn.getAttribute('data-tab');
+    tabContents.forEach(c=>{
+      c.style.display = (c.getAttribute('data-content')===tab)?'block':'none';
+    });
+  });
+});
+tabContents.forEach(c=>c.style.display='none');
+tabContents[0].style.display='block';
+
+// --- Slider ---
+const fovSlider = document.getElementById('fov-slider');
+const fovValue = document.getElementById('fov-value');
+fovSlider.addEventListener('input',()=>{ fovValue.textContent = fovSlider.value; });
+
+// --- Cores + Matrix ---
+const colorCircles = document.querySelectorAll('.color-circle');
+colorCircles.forEach(c=>{
+  c.addEventListener('click',()=>{
+    let cor = '';
+    if(c.classList.contains('red')) cor='red';
+    if(c.classList.contains('green')) cor='lime';
+    if(c.classList.contains('blue')) cor='blue';
+    if(c.classList.contains('pink')) cor='hotpink';
+    if(c.classList.contains('yellow')) cor='orange';
+    painelFlutuante.style.borderColor = cor;
+    painelFlutuante.style.boxShadow = '0 0 30px '+cor;
+    matrixColor = cor;
+  });
+});
