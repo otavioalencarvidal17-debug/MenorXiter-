@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Flutuante Neon</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<canvas id="matrix-bg"></canvas>
+
+<!-- Login -->
+<div id="login-flutuante" class="flutuante">
+  <h2>MenorXiter</h2>
+  <input type="text" id="key-input" placeholder="Digite sua key">
+  <button id="login-btn">ENTRAR</button>
+  <div id="login-error">Key inválida!</div>
+</div>
+
+<!-- Painel flutuante -->
+<div id="painel-flutuante" class="flutuante">
+  <div id="sidebar">
+    <button class="tab-btn active" data-tab="1">&#9675;</button>
+    <button class="tab-btn" data-tab="2">+</button>
+    <button class="tab-btn" data-tab="3">&#9632;</button>
+    <button class="tab-btn" data-tab="4">&#128737;</button>
+  </div>
+
+  <div id="conteudo">
+    <div class="tab-content" data-content="1">
+      <h3>Aimbot 💥</h3>
+      <div class="switch-container">
+        <label>Aimbot 95%</label>
+        <input type="checkbox">
+      </div>
+      <div class="switch-container">
+        <label>Aumentar Precisão</label>
+        <input type="checkbox">
+      </div>
+      <div class="slider-container">
+        <label>Precisão <span id="fov-value">5</span></label>
+        <input type="range" min="0" max="10" value="5" id="fov-slider">
+      </div>
+    </div>
+
+    <div class="tab-content" data-content="2">
+      <h3>Funções Recoil ⚡</h3>
+      <div class="switch-container">
+        <label>No Recoil</label>
+        <input type="checkbox">
+      </div>
+      <div class="switch-container">
+        <label>Precisão Avançada</label>
+        <input type="checkbox">
+      </div>
+    </div>
+
+    <div class="tab-content" data-content="3">
+      <h3>FPS/Otimização 🚀</h3>
+      <div class="switch-container">
+        <label>Ativar 120 FPS</label>
+        <input type="checkbox">
+      </div>
+      <div class="switch-container">
+        <label>Ativar Otimização</label>
+        <input type="checkbox">
+      </div>
+    </div>
+
+    <div class="tab-content" data-content="4">
+      <h3>Cores do Tema 🎨</h3>
+      <a href="https://discord.gg/9PdFkEu8zh" target="_blank" class="discord-btn">Acessar Discord</a>
+      <div id="color-picker">
+        <div class="color-circle red"></div>
+        <div class="color-circle green"></div>
+        <div class="color-circle blue"></div>
+        <div class="color-circle pink"></div>
+        <div class="color-circle yellow"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
